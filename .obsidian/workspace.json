@@ -153,12 +153,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "02_Rules/rule-ato-instant-asset-writeoff.md",
+                "file": "00_Architecture/Journal_phase-1.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "rule-ato-instant-asset-writeoff"
+              "title": "Journal_phase-1"
             }
           }
         ],
@@ -322,12 +322,12 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "123ad21752713224",
+  "active": "2b76e18df5f7d164",
   "lastOpenFiles": [
-    "03_Registry/registry-namespace-au.md",
     "02_Rules/rule-ato-instant-asset-writeoff.md",
+    "03_Registry/registry-namespace-au.md",
     "00_Architecture/Architecture_System_Manifest.md",
-    "00_Architecture/Journal_phase-1-.md",
+    "00_Architecture/Journal_phase-1.md",
     "00_Architecture/Architecture_Service_Distribution.md",
     "00_Architecture/Architecture_SBRM.md",
     "00_Architecture/Architecture_Cryptographic_Sovereignty.md",
