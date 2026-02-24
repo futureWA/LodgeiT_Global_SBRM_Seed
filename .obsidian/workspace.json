@@ -296,6 +296,7 @@
   },
   "active": "149e5b48c995e2cc",
   "lastOpenFiles": [
+    "00_Architecture/Journal_phase-1-.md",
     "00_Architecture/Architecture_Service_Distribution.md",
     "00_Architecture/Architecture_SBRM.md",
     "00_Architecture/Architecture_Cryptographic_Sovereignty.md",
@@ -326,7 +327,6 @@
     "01_Ontology/fact-uplift-sales-revenue-2026.md",
     "01_Ontology/fact-uplift-retained-earnings-2026.md",
     "01_Ontology/fact-uplift-accounts-payable-2026.md",
-    "01_Ontology/fact-uplift-accounts-receivable-2026.md",
     "trial_balance.csv",
     "1st kedger rewrite.csv",
     "inject_hypercubes.py",
