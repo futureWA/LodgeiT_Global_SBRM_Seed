@@ -1,24 +1,21 @@
 ---
-"@context": "ipfs://bafkreifcontext...[Base_Context]"
-"@id": "urn:uuid:39ea9fe5-91d9-4240-9aac-e0fef729c2c8"
-ontological_class: "FinancialFact"
-gist_equivalent: "gist:Magnitude"
+'@context': ipfs://bafkreifcontext...[Base_Context]
+'@id': urn:uuid:39ea9fe5-91d9-4240-9aac-e0fef729c2c8
+ontological_class: FinancialFact
+gist_equivalent: gist:Magnitude
 domain_tags:
-  - "SBRM"
-  - "Trial-Balance-Ingestion"
-  - "Uplifted-Fact"
-
+- SBRM
+- Trial-Balance-Ingestion
+- Uplifted-Fact
 project_context:
-  reporting_entity: "urn:uuid:entity-lodgeit-demo"
-  reporting_period: "urn:uuid:period-2026"
-
+  reporting_entity: urn:uuid:entity-lodgeit-demo
+  reporting_period: urn:uuid:period-2026
 hypercube_context:
-  primary_hypercube: "StatementOfFinancialPosition"
-  arrangement_pattern: "Hierarchy"
-
+  primary_hypercube: StatementOfFinancialPosition
+  arrangement_pattern: Hierarchy
 integrity:
-  source_uri: "internal://ingestion/csv/trial_balance"
-  content_hash: "4cc08311c4bcb120393a3250769ed9a08433273214a105aea9c4d6a329f9c7fb"
+  source_uri: internal://ingestion/csv/trial_balance
+  content_hash: 4cc08311c4bcb120393a3250769ed9a08433273214a105aea9c4d6a329f9c7fb
 ---
 
 # Cash at Bank (Account: 1-1110)
