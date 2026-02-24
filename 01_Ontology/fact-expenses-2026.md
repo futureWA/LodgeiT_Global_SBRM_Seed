@@ -7,6 +7,9 @@ domain_tags:
 - SBRM
 - IncomeStatement
 - Expenses
+hypercube_context:
+  primary_hypercube: StatementOfComprehensiveIncome
+  arrangement_pattern: RollUp
 integrity:
   source_uri: null
   content_hash: b2b0bc492c57a6132512366355f112708d900a3668f4956a8fd6c3c4a91860c5

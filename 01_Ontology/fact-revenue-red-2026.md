@@ -8,6 +8,9 @@ domain_tags:
 - IncomeStatement
 - Revenue
 - Dimension:Red
+hypercube_context:
+  primary_hypercube: StatementOfComprehensiveIncome
+  arrangement_pattern: RollUp
 integrity:
   source_uri: null
   content_hash: a10724cee82b50efb174c72ecc85f94a034f968f274a4ff6666a4a7f9248e135

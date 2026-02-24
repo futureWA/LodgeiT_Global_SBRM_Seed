@@ -27,6 +27,9 @@ edges:
   target: urn:uuid:def-sbrm-reporting-period
 - rel: sbrm:isInstanceOfConcept
   target: urn:uuid:def-sbr-non-current-assets
+hypercube_context:
+  primary_hypercube: StatementOfFinancialPosition
+  arrangement_pattern: Hierarchy
 integrity:
   source_authority: nostr:pubkey:a1b2c3d4...[LodgeiT_Hex_Pubkey]
   staleness_flag: false

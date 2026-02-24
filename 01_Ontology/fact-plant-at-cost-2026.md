@@ -7,6 +7,9 @@ domain_tags":
 - SBRM
 - FixedAssets
 - GrossValue
+hypercube_context:
+  primary_hypercube: StatementOfFinancialPosition
+  arrangement_pattern: Hierarchy
 integrity:
   source_uri: null
   content_hash: 9c858e5102e3ce06ec5e9c569461e278b58a9c980cc4e6e66bfe4b34c6576295

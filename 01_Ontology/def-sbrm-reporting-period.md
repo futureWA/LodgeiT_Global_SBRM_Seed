@@ -17,6 +17,9 @@ edges:
   target: ipfs://bafybeig...[SBRM_Report_Frame_CID]
 - rel: gist:refersTo
   target: urn:uuid:def-sbrm-reporting-entity
+hypercube_context:
+  primary_hypercube: System_Ontology_Definition
+  arrangement_pattern: SemanticLink
 integrity:
   content_hash: c2554304d366f71117c8b9159710ebead78be26a6c1e3e2efb2bb813411b3689
   source_authority: nostr:pubkey:a1b2c3d4...[LodgeiT_Hex_Pubkey]

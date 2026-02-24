@@ -19,6 +19,9 @@ edges:
   target: urn:uuid:def-sbrm-reporting-period
 - rel: sbrm:isInstanceOfConcept
   target: urn:uuid:def-sbr-total-liabilities
+hypercube_context:
+  primary_hypercube: StatementOfFinancialPosition
+  arrangement_pattern: Hierarchy
 integrity:
   source_uri: null
   source_authority: nostr:pubkey:a1b2c3d4...[LodgeiT_Hex_Pubkey]

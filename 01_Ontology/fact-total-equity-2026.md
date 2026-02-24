@@ -18,6 +18,9 @@ edges:
   target: urn:uuid:def-sbrm-reporting-period
 - rel: sbrm:isInstanceOfConcept
   target: urn:uuid:def-sbr-total-equity
+hypercube_context:
+  primary_hypercube: StatementOfChangesInEquity
+  arrangement_pattern: RollForward
 integrity:
   source_uri: null
   source_authority: nostr:pubkey:a1b2c3d4...[LodgeiT_Hex_Pubkey]

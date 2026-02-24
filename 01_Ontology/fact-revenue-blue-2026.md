@@ -9,6 +9,9 @@ domain_tags:
 - Revenue
 - Dimension:Blue
 content_hash: 98a6ac6768c58ece74f826ea34c932d99ee0bd09ea6faaae0a3b095bad3e3e8b
+hypercube_context:
+  primary_hypercube: StatementOfComprehensiveIncome
+  arrangement_pattern: RollUp
 integrity:
   source_uri: null
   content_hash: 98a6ac6768c58ece74f826ea34c932d99ee0bd09ea6faaae0a3b095bad3e3e8b

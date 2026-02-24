@@ -8,6 +8,9 @@ domain_tags:
 - Distributions
 gist_equivalent: gist:Fact
 content_hash: e4a52063d9c269ccce9eaecc492fe4d8ddef19cc4451601600c6e43eec78aee2
+hypercube_context:
+  primary_hypercube: StatementOfChangesInEquity
+  arrangement_pattern: RollForward
 integrity:
   source_uri: null
   content_hash: e4a52063d9c269ccce9eaecc492fe4d8ddef19cc4451601600c6e43eec78aee2

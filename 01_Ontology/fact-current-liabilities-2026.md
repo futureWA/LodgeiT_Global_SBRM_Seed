@@ -6,6 +6,9 @@ gist_equivalent: gist:Fact
 domain_tags:
 - SBRM
 - BalanceSheet
+hypercube_context:
+  primary_hypercube: StatementOfFinancialPosition
+  arrangement_pattern: Hierarchy
 integrity:
   source_uri: null
   content_hash: 8b5ec9aeb30ae82c3e4872ef9ec15fe9f644fcc7d58c1cb0388c5169956a95d5

@@ -7,6 +7,9 @@ domain_tags:
 - IncomeStatement
 - Revenue
 gist_equivalent: gist:Fact
+hypercube_context:
+  primary_hypercube: StatementOfComprehensiveIncome
+  arrangement_pattern: RollUp
 integrity:
   source_uri: '[INJECT_SOURCE_URI_HERE]'
   content_hash: fc5c494fb8e7e293480404c7bd7f9d454c73c762d11c937d073b95c8ad8d812e

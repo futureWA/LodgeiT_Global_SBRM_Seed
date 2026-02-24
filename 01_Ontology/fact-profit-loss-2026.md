@@ -8,6 +8,9 @@ domain_tags:
 - IncomeStatement
 gist_equivalent: gist:Event
 content_hash: 8df75cc0d5e58dec35037bcee77dce0d9acadcb39241dc70499290c5533ff771
+hypercube_context:
+  primary_hypercube: StatementOfComprehensiveIncome
+  arrangement_pattern: RollUp
 integrity:
   source_uri: null
   content_hash: 8df75cc0d5e58dec35037bcee77dce0d9acadcb39241dc70499290c5533ff771

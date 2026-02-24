@@ -8,6 +8,9 @@ domain_tags:
 - Revenue
 - Dimension:Green
 gist_equivalent: gist:Information
+hypercube_context:
+  primary_hypercube: StatementOfComprehensiveIncome
+  arrangement_pattern: RollUp
 integrity:
   source_uri: null
   content_hash: 03ad9eed3a08cf727bd5269864e8a454991654300aa98ff6a6a78be63b05a472

@@ -16,6 +16,9 @@ edges:
   target: urn:uuid:def-sbrm-reporting-period-2026
 - rel: sbrm:isInstanceOfConcept
   target: urn:uuid:def-sbr-accumulated-depreciation
+hypercube_context:
+  primary_hypercube: StatementOfFinancialPosition
+  arrangement_pattern: Hierarchy
 integrity:
   source_uri: null
   content_hash: 5b668f41bbc359974a89ea84a54dac129d1ea4f3326d766af423962988344325

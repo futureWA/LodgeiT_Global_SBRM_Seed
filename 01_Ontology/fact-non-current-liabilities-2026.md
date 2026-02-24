@@ -7,6 +7,9 @@ domain_tags:
 - BalanceSheet
 gist_equivalent: gist:Fact
 content_hash: ef3836d76b00e3188fbc82b86acf73f53c3d53c9edaa6575d1f194b30d79a1c6
+hypercube_context:
+  primary_hypercube: StatementOfFinancialPosition
+  arrangement_pattern: Hierarchy
 integrity:
   source_uri: null
   content_hash: ef3836d76b00e3188fbc82b86acf73f53c3d53c9edaa6575d1f194b30d79a1c6

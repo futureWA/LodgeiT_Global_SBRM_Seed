@@ -7,6 +7,9 @@ domain_tags:
 - AuditEvidence
 - BankReconciliation
 gist_equivalent: gist:Fact
+hypercube_context:
+  primary_hypercube: WorkingPaper_BankReconciliation
+  arrangement_pattern: CrossReference
 integrity:
   source_uri: null
   content_hash: 58a141142b071bf871d19eff8ea492e781b532d3fbb9aa6c3151b82c2d1f0a58

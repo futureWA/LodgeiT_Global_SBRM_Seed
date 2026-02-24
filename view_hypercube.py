@@ -1,49 +1,49 @@
 import os
 import yaml
 
-def render_hypercube():
+def render_sbrm_hypercubes():
     ontology_path = './01_Ontology'
-    hypercube = {}
+    hypercubes = {}
 
-    print("\n=== LODGEIT GLOBAL: SBRM HYPERCUBE VIEW ===")
+    print("\n=== LODGEIT GLOBAL: SBRM HYPERCUBE VISUALIZER ===")
     
-    # Iterate through all fact nodes
     for filename in os.listdir(ontology_path):
-        if filename.endswith(".md"):
-            with open(os.path.join(ontology_path, filename), 'r', encoding='utf-8') as f:
-                content = f.read()
-                # Split YAML from Body
-                parts = content.split('---')
-                if len(parts) >= 3:
-                    try:
-                        metadata = yaml.safe_load(parts[1])
-                        # We look for the classification in the body or tags
-                        # For the Uplifted facts, we'll parse the 'Classification' line
-                        body = parts[2]
-                        classification = "Unclassified"
+        if not filename.endswith(".md"): continue
+            
+        with open(os.path.join(ontology_path, filename), 'r', encoding='utf-8') as f:
+            content = f.read()
+            parts = content.split('---')
+            if len(parts) >= 3:
+                try:
+                    metadata = yaml.safe_load(parts[1])
+                    hc = metadata.get('hypercube_context', {})
+                    
+                    # Extract architectural parameters
+                    primary = hc.get('primary_hypercube', 'Unclassified_Nodes')
+                    pattern = hc.get('arrangement_pattern', 'Unknown_Pattern')
+                    node_id = metadata.get('@id', 'No ID')
+                    
+                    if primary not in hypercubes:
+                        hypercubes[primary] = {}
+                    if pattern not in hypercubes[primary]:
+                        hypercubes[primary][pattern] = []
                         
-                        for line in body.split('\n'):
-                            if "Classification:" in line:
-                                classification = line.split(":")[1].strip()
-                        
-                        if classification not in hypercube:
-                            hypercube[classification] = []
-                            
-                        hypercube[classification].append({
-                            "name": filename.replace('.md', ''),
-                            "id": metadata.get('@id', 'No ID')
-                        })
-                    except Exception as e:
-                        continue
+                    hypercubes[primary][pattern].append({
+                        "name": filename.replace('.md', ''),
+                        "id": node_id
+                    })
+                except Exception as e:
+                    pass
 
-    # Print the nested structure
-    for dimension, nodes in sorted(hypercube.items()):
-        print(f"\n[Dimension: {dimension}]")
-        for node in nodes:
-            print(f"  └── Fact: {node['name']}")
-            print(f"      ID: {node['id']}")
+    # Render the nested SBRM architecture
+    for cube_name, patterns in sorted(hypercubes.items()):
+        print(f"\n[Hypercube: {cube_name}]")
+        for pattern, nodes in sorted(patterns.items()):
+            print(f"  └── Pattern: {pattern}")
+            for node in sorted(nodes, key=lambda x: x['name']):
+                print(f"      ├── {node['name']}")
 
-    print("\n=== End of Cube ===")
+    print("\n=== End of Architecture ===")
 
 if __name__ == "__main__":
-    render_hypercube()
+    render_sbrm_hypercubes()

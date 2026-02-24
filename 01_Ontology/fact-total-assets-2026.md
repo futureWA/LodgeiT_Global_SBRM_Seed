@@ -20,6 +20,9 @@ edges:
   target: urn:uuid:def-sbrm-reporting-period
 - rel: sbrm:isInstanceOfConcept
   target: urn:uuid:def-sbr-total-assets
+hypercube_context:
+  primary_hypercube: StatementOfFinancialPosition
+  arrangement_pattern: Hierarchy
 integrity:
   content_hash: 09bfd78d206b87a9cb112d3734f3d5113dc5127e25ebd7f49d1b7a58ff5d2d0b
   source_authority: nostr:pubkey:a1b2c3d4...[LodgeiT_Hex_Pubkey]
