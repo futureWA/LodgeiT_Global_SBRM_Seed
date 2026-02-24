@@ -125,12 +125,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00_Architecture/Journal_phase-1-.md.md",
+                "file": "README.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Journal_phase-1-.md"
+              "title": "README"
             }
           }
         ],
@@ -294,15 +294,26 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "123ad21752713224",
+  "active": "149e5b48c995e2cc",
   "lastOpenFiles": [
+    "03_Registry/registry-sbrm-master-ruleset.md",
+    "03_Registry/reg-namespaces-core.md",
+    "03_Registry/reg-authorities-trusted.md",
+    "03_Registry/reg-access-control.md",
+    "02_Rules/rule-sbrm-fixed-assets-net.md",
+    "02_Rules/rule-sbrm-asset-rollup.md",
+    "02_Rules/rule-sbrm-accounting-equation.md",
+    "01_Ontology/fact-cash-ledger-2026.md",
+    "01_Ontology/fact-accumulated-depreciation-2026.md",
+    "01_Ontology/def-sbrm-reporting-period.md",
+    "01_Ontology/def-sbrm-reporting-entity.md",
+    "00_Architecture/Journal_phase-1-.md.md",
     "02_Rules/sbrm_kb.pl",
     "prolog_bridge.py",
     "New Text Document.txt",
     "vault_state_export.json",
     "extract_vault_state.py",
     "01_Ontology/fact-current-liabilities-2026.md",
-    "00_Architecture/Journal_phase-1-.md.md",
     "00_Architecture/journal-phase2-semantic-uplift.md",
     "00_Architecture/Genesis_Node.md",
     "README.md",
@@ -318,19 +329,8 @@
     "1st kedger rewrite.csv",
     "inject_hypercubes.py",
     "view_hypercube.py",
-    "03_Registry/reg-namespaces-core.md",
     "Licence.txt",
-    "03_Registry/reg-authorities-trusted.md",
     "00_Architecture/JSON-LD_Frame.md",
-    "03_Registry/registry_reg-access-control.md",
-    "00_Architecture/Architecture_System_Manifest.md",
-    "00_Architecture/Architecture_Service_Distribution.md",
-    "00_Architecture/Architecture_SBRM.md",
-    "00_Architecture/Architecture_Cryptographic_Sovereignty.md",
-    "00_Architecture/00_Architecture_Distribution_Protocol.md",
-    "00_Architecture/00_Architecture_System_Manifest2.md",
-    "03_Registry/reg-access-control.md",
-    "__pycache__/logic.cpython-314.pyc",
-    "01_Ontology/fact-cash-ledger-2026.md"
+    "03_Registry/registry_reg-access-control.md"
   ]
 }
