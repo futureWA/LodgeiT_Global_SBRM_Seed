@@ -9,7 +9,7 @@ def map_hierarchy(concept_id):
     if 'plant' in c or 'accumulated' in c: return "section:non-current-assets"
     if c == 'section:current-assets' or c == 'section:non-current-assets': return "section:total-assets"
     
-    if 'payable' in c: return "section:current-liabilities"
+    if 'payable' in c or 'other-current-liab' in c: return "section:current-liabilities"
     if c == 'section:current-liabilities' or c == 'section:non-current-liabilities': return "section:total-liabilities"
     
     if 'sales' in c or ('revenue' in c and c != 'section:revenue'): return "section:revenue"

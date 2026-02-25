@@ -1,85 +1,50 @@
-import os
-import glob
-import hashlib
-import time
-import google.generativeai as genai
+import os, yaml, hashlib
 
-# Configure the Gemini API client
-genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
+DIR = './01_Ontology'
+print("=== INITIATING VAULT HEAL & LEAF MINTING ===")
 
-# Use the Gemini 2.0 Flash model for fast, high-context extraction
-model = genai.GenerativeModel('gemini-2.5-flash')
-
-TARGET_DIRS = ["./01_Ontology", "./02_Rules", "./03_Registry"]
-
-SYSTEM_INSTRUCTION = """
-You are an Ontological Extraction and Serialization Agent for a Global Notes architecture.
-I am providing you with a raw Markdown file representing a node in an SBRM multidimensional hypercube. 
-Inside 'parameters_exposed', you MUST use a dictionary format { variable_name: { sbrm_label: label_value } }. DO NOT use bulleted lists or arrays.
-
-YOUR MISSION: Repair and standardize the YAML frontmatter. If fields are 'Empty' or 'null', you MUST initialize them into valid YAML dictionary structures so they are machine-parsable.
-
-STRICT RULES:
-1. **Structural Initialization**: If 'integrity' or 'parameters_exposed' are empty, initialize them.
-   - 'integrity' MUST contain 'source_uri' and 'content_hash: "[INJECT_HASH_HERE]"'.
-   - 'parameters_exposed' MUST be a dictionary '{}' or contain variables with 'sbrm_label'.
-2. **Polymorphic Nullification**: For epistemic nodes (Definitions/Registry), set 'payload_format', 'execution_context', and 'shacl_shape_ref' inside 'execution_parameters' to 'null'.
-3. **Gist Enforcement**: Ensure 'gist_equivalent' maps to a Gist Upper Ontology term (e.g., gist:Directive, gist:Category, gist:Event).
-4. **No Wrappers**: Output ONLY the raw Markdown text. Do not use ```markdown backticks.
-
-Do NOT alter the body, Prolog code, or logical edges.
-"""
-
-def calculate_body_hash(markdown_content):
-    """Calculates SHA-256 of the body to ensure cryptographic integrity."""
-    parts = markdown_content.split('---')
-    if len(parts) >= 3:
-        body = '---'.join(parts[2:]).strip()
-        return hashlib.sha256(body.encode('utf-8')).hexdigest()
-    return None
-
-def heal_markdown_file(filepath):
-    print(f"Healing: {filepath}...")
-    with open(filepath, 'r', encoding='utf-8') as f:
-        original_content = f.read()
-
-    prompt = f"{SYSTEM_INSTRUCTION}\n\nFILE_CONTENT:\n{original_content}"
-
-    try:
-        response = model.generate_content(prompt)
-        healed_content = response.text.strip()
-        
-        # Clean potential model formatting artifacts
-        if healed_content.startswith("```"):
-            healed_content = "\n".join(healed_content.split("\n")[1:-1]) if "```" in healed_content else healed_content
-
-        new_hash = calculate_body_hash(healed_content)
-        if not new_hash:
-            print(f"  [X] Hash failure on {filepath}.")
-            return False
-
-        # Inject the real hash into the standardized structure
-        final_content = healed_content.replace("[INJECT_HASH_HERE]", new_hash)
-
-        with open(filepath, 'w', encoding='utf-8') as f:
-            f.write(final_content)
-            
-        print(f"  [v] Integral and Socketed.")
-        return True
-
-    except Exception as e:
-        print(f"  [X] Error on {filepath}: {e}")
-        return False
-
-def run_vault_crawler():
-    print("Initiating Global Fleet Semantic Repair Sequence...")
-    print("-" * 50)
+# 1. Mint "Other Current Liabilities" for the orphaned 30k base
+with open(f'{DIR}/fact-current-liabilities-2026.md', 'r', encoding='utf-8') as f:
+    parts = f.read().split('---', 2)
+    fm = yaml.safe_load(parts[1])
     
-    for directory in TARGET_DIRS:
-        if not os.path.exists(directory): continue
-        for filepath in glob.glob(f"{directory}/**/*.md", recursive=True):
-            heal_markdown_file(filepath)
-            time.sleep(1) # Flash is fast; minimal delay needed
+fm_leaf = fm.copy()
+fm_leaf['@id'] = 'urn:uuid:fact-other-curr-liab-001'
+fm_leaf['value'] = 30000.0
+for edge in fm_leaf.get('edges', []):
+    if edge.get('rel') == 'sbrm:isInstanceOfConcept':
+        edge['target'] = 'urn:uuid:def-sbr-other-current-liabilities'
 
-if __name__ == "__main__":
-    run_vault_crawler()
+body = "# Other Current Liabilities\nBase: 30000.0\n"
+fm_leaf['content_hash'] = hashlib.sha256(body.encode('utf-8')).hexdigest()
+
+with open(f'{DIR}/fact-other-current-liabilities-2026.md', 'w', encoding='utf-8') as f:
+    f.write(f"---\n{yaml.dump(fm_leaf, sort_keys=False)}---\n{body}")
+print("[MINTED] fact-other-current-liabilities-2026.md")
+
+# 2. Idempotently Reset Master Nodes
+fixes = {
+    'fact-current-assets-2026.md': 160000.0,
+    'fact-total-assets-2026.md': 235000.0,
+    'fact-current-liabilities-2026.md': 60000.0,
+    'fact-total-liabilities-2026.md': 110000.0,
+    'fact-revenue-2026.md': 200000.0,
+    'fact-expenses-2026.md': 155000.0,
+    'fact-profit-loss-2026.md': 45000.0,
+    'fact-total-equity-2026.md': 125000.0,
+    'fact-cash-ledger-2026.md': 50000.0
+}
+
+for file, val in fixes.items():
+    path = os.path.join(DIR, file)
+    if os.path.exists(path):
+        with open(path, 'r', encoding='utf-8') as f:
+            p = f.read().split('---', 2)
+            fm = yaml.safe_load(p[1])
+            fm['value'] = float(val)
+            fm['content_hash'] = hashlib.sha256(p[2].encode('utf-8')).hexdigest()
+        with open(path, 'w', encoding='utf-8') as f:
+            f.write(f"---\n{yaml.dump(fm, sort_keys=False)}---\n{p[2]}")
+        print(f"[RESET] {file} -> {val}")
+
+print("=== VAULT HEAL COMPLETE ===")
