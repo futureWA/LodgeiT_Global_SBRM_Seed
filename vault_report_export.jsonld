@@ -292,7 +292,7 @@
       }
     },
     {
-      "value": 50000.0,
+      "value": 160000.0,
       "decimals": 2,
       "unit": "iso4217:AUD",
       "context": {
@@ -304,7 +304,7 @@
       }
     },
     {
-      "value": 30000.0,
+      "value": 60000.0,
       "decimals": 2,
       "unit": "iso4217:AUD",
       "context": {
@@ -331,7 +331,7 @@
       }
     },
     {
-      "value": 80000.0,
+      "value": 155000.0,
       "decimals": 2,
       "unit": "iso4217:AUD",
       "context": {
@@ -397,7 +397,7 @@
       }
     },
     {
-      "value": 20000.0,
+      "value": 45000.0,
       "decimals": 2,
       "unit": "iso4217:AUD",
       "context": {
@@ -412,7 +412,7 @@
       }
     },
     {
-      "value": 100000.0,
+      "value": 200000.0,
       "decimals": 2,
       "unit": "iso4217:AUD",
       "context": {
@@ -487,7 +487,7 @@
       }
     },
     {
-      "value": 125000.0,
+      "value": 160000.0,
       "decimals": 2,
       "unit": "iso4217:AUD",
       "context": {
@@ -499,7 +499,7 @@
       }
     },
     {
-      "value": 45000.0,
+      "value": 100000.0,
       "decimals": 2,
       "unit": "iso4217:AUD",
       "context": {
@@ -514,7 +514,7 @@
       }
     },
     {
-      "value": 80000.0,
+      "value": 60000.0,
       "decimals": 2,
       "unit": "iso4217:AUD",
       "context": {

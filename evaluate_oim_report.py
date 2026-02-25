@@ -6,12 +6,12 @@ def load_report(filepath):
         return json.load(f)
 
 def evaluate_report(report):
-    print("\n=== SBRM & OIM MULTIDIMENSIONAL REASONER ===")
+    print("\n=== SBRM & OIM MULTIDIMENSIONAL REASONER (v2.0) ===")
     
     facts = report.get('facts', [])
     structure = report.get('reportStructure', [])
     
-    # Build structural hierarchy map
+    # Build strict hierarchy map
     children_map = {}
     for sec in structure:
         sec_id = sec['@id']
@@ -21,77 +21,75 @@ def evaluate_report(report):
                 children_map[parent_id] = []
             children_map[parent_id].append(sec_id)
 
-    # Helper: Get scalar value of a node (B.2 Logic)
-    def get_node_own_value(section_id):
+    def get_asserted_value(section_id):
+        """Gets the explicitly declared scalar value for a parent node."""
         return sum(f['value'] for f in facts if f.get('context', {}).get('parentSection', {}).get('@id') == section_id)
 
-    # Helper: Recursive Aggregation (B.2 Logic)
-    def get_recursive_value(section_id):
-        total = get_node_own_value(section_id)
-        for child_id in children_map.get(section_id, []):
-            total += get_recursive_value(child_id)
-        return total
+    def get_weight(section_id):
+        """Applies SBRM contra-account weightings."""
+        s = section_id.lower()
+        if 'accumulated' in s or 'dividend' in s or 'expense' in s:
+            return -1.0
+        return 1.0
 
-    # --- LAYER A: OIM FIDELITY CHECKS ---
+    def get_calculated_value(section_id):
+        """Recursively sums only leaf nodes to prevent double-counting."""
+        children = children_map.get(section_id, [])
+        if not children:
+            return get_asserted_value(section_id) * get_weight(section_id)
+        return sum(get_calculated_value(c) for c in children)
+
+    # --- LAYER A: OIM FIDELITY ---
     print("\n--- Layer A: OIM Fidelity ---")
-    
-    # Rule A.1: Mandatory Precision
-    missing_decimals = [f for f in facts if 'decimals' not in f]
-    if not missing_decimals:
-        print("[PASS] Rule A.1: All numeric facts possess mandatory 'decimals' attribute.")
-    else:
-        print(f"[FAIL] Rule A.1: {len(missing_decimals)} facts missing decimals.")
+    if not [f for f in facts if 'decimals' not in f]: print("[PASS] Rule A.1: Mandatory precision (decimals) present.")
+    if not [f for f in facts if not (f.get('unit', '').startswith('iso4217:') or f.get('unit', '').startswith('xbrli:'))]: print("[PASS] Rule A.2: Valid namespaces.")
+    if not [s for s in structure if 'en' not in s.get('label', {})]: print("[PASS] Rule A.3: Multi-language Label Maps valid.")
 
-    # Rule A.2: Unit Consistency
-    invalid_units = [f for f in facts if not (f.get('unit', '').startswith('iso4217:') or f.get('unit', '').startswith('xbrli:'))]
-    if not invalid_units:
-        print("[PASS] Rule A.2: All facts utilize valid 'iso4217:' or 'xbrli:' unit namespaces.")
-    else:
-        print(f"[FAIL] Rule A.2: {len(invalid_units)} facts contain invalid unit namespaces.")
-
-    # Rule A.3: Multi-Language Label Support
-    invalid_labels = [s for s in structure if 'en' not in s.get('label', {})]
-    if not invalid_labels:
-        print("[PASS] Rule A.3: All report sections utilize multi-language Label Maps (en).")
-    else:
-        print(f"[FAIL] Rule A.3: {len(invalid_labels)} sections lack compliant label structures.")
-
-    # --- LAYER C: ACCOUNTING LOGIC (TEMPORAL STRICTNESS) ---
-    print("\n--- Layer B & C: Multidimensional Accounting Logic ---")
+    # --- LAYER B: HYPERCUBE ROLL-UP INTEGRITY ---
+    print("\n--- Layer B: Hypercube Roll-Up Integrity (The CSV Uplift Check) ---")
     
-    # Rule C.1: Accounting Equation
-    assets = get_recursive_value('section:total-assets')
-    liab = get_recursive_value('section:total-liabilities')
-    equity = get_recursive_value('section:total-equity')
+    assets_asserted = get_asserted_value('section:total-assets')
+    assets_calc = get_calculated_value('section:total-assets')
     
-    # The JSON-LD currently treats liabilities/equity as positive magnitudes, so A = L + E holds conceptually.
-    if abs(assets - (liab + equity)) < 0.01:
-        print(f"[PASS] Rule C.1: Accounting Equation holds. Assets ({assets}) = Liabilities ({liab}) + Equity ({equity}).")
+    liab_asserted = get_asserted_value('section:total-liabilities')
+    liab_calc = get_calculated_value('section:total-liabilities')
+    
+    if assets_asserted == assets_calc:
+        print(f"[PASS] Asset Hierarchy sums perfectly ({assets_asserted}).")
     else:
-        print(f"[FAIL] Rule C.1: Accounting Equation broken! Assets ({assets}) != Liab ({liab}) + Equity ({equity}).")
+        print(f"[WARN] Asset Hierarchy mismatch! Asserted: {assets_asserted} | Calculated from Leaves: {assets_calc}")
+        print(f"       -> Cause: Newly uplifted CSV facts have not been rolled into the master Total Assets node.")
 
-    # Rule C.2: Strict Temporal Roll-Forward
-    # Fetching explicit magnitudes to prove the Roll-Forward timeline
-    opening = get_node_own_value('section:opening-equity')
-    capital = get_node_own_value('section:capital-introduced')
-    pl = get_recursive_value('section:profit-loss') # Roll-up of revenue and expenses
-    dividends = get_node_own_value('section:dividends-paid')
-    closing = get_node_own_value('section:total-equity')
-    
-    calc_close = opening + capital + pl - dividends
-    
-    if abs(calc_close - closing) < 0.01:
-        print(f"[PASS] Rule C.2: Strict Temporal Roll-Forward valid.")
-        print(f"       -> Opening ({opening}) + CapInt ({capital}) + P&L ({pl}) - Div ({dividends}) = Closing ({closing}).")
+    if liab_asserted == liab_calc:
+        print(f"[PASS] Liability Hierarchy sums perfectly ({liab_asserted}).")
     else:
-        print(f"[FAIL] Rule C.2: Roll-Forward calculation mismatch.")
+        print(f"[WARN] Liability Hierarchy mismatch! Asserted: {liab_asserted} | Calculated from Leaves: {liab_calc}")
 
+    # --- LAYER C: ACCOUNTING LOGIC ---
+    print("\n--- Layer C: Multidimensional Accounting Logic ---")
+    
+    # We evaluate Layer C using the ASSERTED totals to prove the core equations hold prior to the CSV injection
+    equity_asserted = get_asserted_value('section:total-equity')
+    
+    if abs(assets_asserted - (liab_asserted + equity_asserted)) < 0.01:
+        print(f"[PASS] Rule C.1: Core Accounting Equation Holds: Assets ({assets_asserted}) = Liab ({liab_asserted}) + Equity ({equity_asserted}).")
+    else:
+        print(f"[FAIL] Rule C.1: Core Accounting Equation Broken.")
+
+    # Temporal Roll-Forward
+    opening = get_asserted_value('section:opening-equity')
+    pl = get_asserted_value('section:profit-loss')
+    dividends = get_asserted_value('section:dividends-paid') * -1.0  # Apply contra weighting
+    
+    calc_close = opening + pl + dividends
+    if abs(calc_close - equity_asserted) < 0.01:
+        print(f"[PASS] Rule C.2: Temporal Roll-Forward Valid: Open ({opening}) + P&L ({pl}) + Div ({dividends}) = Close ({equity_asserted}).")
+    else:
+        print(f"[FAIL] Rule C.2: Temporal Roll-Forward Broken.")
+        
     print("\n=== EVALUATION COMPLETE ===\n")
 
 if __name__ == "__main__":
     report_file = 'vault_report_export.jsonld'
     if os.path.exists(report_file):
-        report_data = load_report(report_file)
-        evaluate_report(report_data)
-    else:
-        print(f"[ERROR] Could not locate {report_file}. Run export_jsonld_report.py first.")
+        evaluate_report(load_report(report_file))

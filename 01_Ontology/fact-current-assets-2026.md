@@ -27,7 +27,9 @@ integrity:
   staleness_flag: false
   source_uri: null
   content_hash: f8b413994a205b54548df7a614db251ee2f595602a48679ae783c3135c5d2547
+value: 160000.0
 ---
+
 
 # Fact: Current Assets
 As of the 2026 reporting period, the entity holds Current Assets valued at $50,000.00 AUD.

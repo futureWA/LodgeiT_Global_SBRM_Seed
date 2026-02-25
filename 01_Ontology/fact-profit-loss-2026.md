@@ -24,7 +24,9 @@ edges:
   target: urn:uuid:def-sbrm-reporting-period-2026-duration
 - rel: sbrm:isInstanceOfConcept
   target: urn:uuid:def-sbr-profit-loss
+value: 45000.0
 ---
+
 
 # Fact: Profit & Loss (2026 Duration)
 For the 2026 duration, the entity generated a Net Profit of $20,000.00 AUD.

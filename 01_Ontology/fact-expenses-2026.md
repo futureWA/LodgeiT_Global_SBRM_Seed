@@ -23,7 +23,9 @@ edges:
   target: urn:uuid:def-sbrm-reporting-period-2026-duration
 - rel: sbrm:isInstanceOfConcept
   target: urn:uuid:def-sbr-expenses
+value: 155000.0
 ---
+
 
 # Fact: Expenses (2026 Duration)
 For the 2026 duration, the entity incurred Expenses of $80,000.00 AUD.
