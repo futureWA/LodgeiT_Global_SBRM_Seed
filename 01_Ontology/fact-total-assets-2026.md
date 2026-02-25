@@ -34,8 +34,10 @@ economics:
   payment_pointer: null
   l402_rate: 0
   access_tier: private_ledger
-value: 160000.0
+value: 235000.0
 ---
+
+
 
 
 # Fact: Total Assets (Sample)

@@ -23,7 +23,9 @@ edges:
   target: urn:uuid:def-sbrm-reporting-period-2026
 - rel: sbrm:isInstanceOfConcept
   target: urn:uuid:def-sbr-cash-at-bank
+value: 50000.0
 ---
+
 
 # Fact: Cash at Bank (Ledger)
 Per the internal trial balance, the Cash at Bank account holds $50,000.00 AUD.

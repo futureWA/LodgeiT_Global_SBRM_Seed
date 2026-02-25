@@ -27,8 +27,10 @@ integrity:
   source_authority: nostr:pubkey:a1b2c3d4...[LodgeiT_Hex_Pubkey]
   staleness_flag: false
   content_hash: 29c0b805cbebffdbc6b077c9fc0c2179780d790f8f710c650b82fa2fd4b11d83
-value: 60000.0
+value: 110000.0
 ---
+
+
 
 
 # Fact: Total Liabilities

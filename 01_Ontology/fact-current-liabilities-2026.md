@@ -22,8 +22,10 @@ edges:
   target: urn:uuid:def-sbrm-reporting-period
 - rel: sbrm:isInstanceOfConcept
   target: urn:uuid:def-sbr-current-liabilities
-value: 60000.0
+value: 30000.0
 ---
+
+
 
 
 # Fact: Current Liabilities
