@@ -16,8 +16,15 @@ hypercube_context:
 integrity:
   source_uri: internal://ingestion/csv/trial_balance
   content_hash: 9da8fd59f0511a4fc7fdf77fa98324d15e95261e21c1f6dfd47189560fa607bb
+value: 10000.0
+edges:
+- rel: sbrm:isInstanceOfConcept
+  target: urn:uuid:def-sbr-capital-introduced
+- rel: sbrm:hasReportingEntity
+  target: urn:uuid:def-sbrm-reporting-entity
+- rel: sbrm:hasReportingPeriod
+  target: urn:uuid:period-2026
 ---
-
 # Capital Introduced (Account: 3-1100)
 Balance: 10000.0
 Classification: TotalEquity

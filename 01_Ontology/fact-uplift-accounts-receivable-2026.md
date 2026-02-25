@@ -16,8 +16,15 @@ hypercube_context:
 integrity:
   source_uri: internal://ingestion/csv/trial_balance
   content_hash: 7a522f7af2c7f0a7b9dfc9d2bc744625bac7879a573c6e0c738c2253d16c7952
+value: 25000.0
+edges:
+- rel: sbrm:isInstanceOfConcept
+  target: urn:uuid:def-sbr-accounts-receivable
+- rel: sbrm:hasReportingEntity
+  target: urn:uuid:def-sbrm-reporting-entity
+- rel: sbrm:hasReportingPeriod
+  target: urn:uuid:period-2026
 ---
-
 # Accounts Receivable (Account: 1-1200)
 Balance: 25000.0
 Classification: CurrentAssets

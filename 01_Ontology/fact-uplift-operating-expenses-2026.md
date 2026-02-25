@@ -16,8 +16,15 @@ hypercube_context:
 integrity:
   source_uri: internal://ingestion/csv/trial_balance
   content_hash: bc464a8857581685712e1aca8c5e45413514028fe20faf62824e03272292a279
+value: 75000.0
+edges:
+- rel: sbrm:isInstanceOfConcept
+  target: urn:uuid:def-sbr-operating-expenses
+- rel: sbrm:hasReportingEntity
+  target: urn:uuid:def-sbrm-reporting-entity
+- rel: sbrm:hasReportingPeriod
+  target: urn:uuid:period-2026
 ---
-
 # Operating Expenses (Account: 5-1000)
 Balance: 75000.0
 Classification: Expenses

@@ -16,8 +16,15 @@ hypercube_context:
 integrity:
   source_uri: internal://ingestion/csv/trial_balance
   content_hash: a25fc7d61a0dc8bfd987f50e3a1d8af8c9258fecb979e7e1e744330977e56766
+value: 10000.0
+edges:
+- rel: sbrm:isInstanceOfConcept
+  target: urn:uuid:def-sbr-nab-5510
+- rel: sbrm:hasReportingEntity
+  target: urn:uuid:def-sbrm-reporting-entity
+- rel: sbrm:hasReportingPeriod
+  target: urn:uuid:period-2026
 ---
-
 # NAB 5510 (Account: 1-1120)
 Balance: 10000.0
 Classification: CurrentAssets

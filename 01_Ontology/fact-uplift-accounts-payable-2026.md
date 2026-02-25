@@ -16,8 +16,15 @@ hypercube_context:
 integrity:
   source_uri: internal://ingestion/csv/trial_balance
   content_hash: c4aafeadee051d1873898c928a46ce03bf29028bf336cdb06f76e2220f6ca906
+value: 30000.0
+edges:
+- rel: sbrm:isInstanceOfConcept
+  target: urn:uuid:def-sbr-accounts-payable
+- rel: sbrm:hasReportingEntity
+  target: urn:uuid:def-sbrm-reporting-entity
+- rel: sbrm:hasReportingPeriod
+  target: urn:uuid:period-2026
 ---
-
 # Accounts Payable (Account: 2-2100)
 Balance: 30000.0
 Classification: CurrentLiabilities

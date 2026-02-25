@@ -16,8 +16,15 @@ hypercube_context:
 integrity:
   source_uri: internal://ingestion/csv/trial_balance
   content_hash: 715c39fd7d3b92182e078869d200f05e4124889973cf73dbdc8a3aba97f3e6f2
+value: 100000.0
+edges:
+- rel: sbrm:isInstanceOfConcept
+  target: urn:uuid:def-sbr-sales-revenue
+- rel: sbrm:hasReportingEntity
+  target: urn:uuid:def-sbrm-reporting-entity
+- rel: sbrm:hasReportingPeriod
+  target: urn:uuid:period-2026
 ---
-
 # Sales Revenue (Account: 4-1000)
 Balance: 100000.0
 Classification: TotalRevenue
