@@ -324,8 +324,9 @@
   },
   "active": "2b76e18df5f7d164",
   "lastOpenFiles": [
-    "asset_register.json",
+    "ingest_assets.py",
     "New Text Document.txt",
+    "asset_register.json",
     "latest_sbrm_payload.jsonld",
     "02_Rules/rule-sbrm-profit-loss.md",
     "README.md",
@@ -358,7 +359,6 @@
     "01_Ontology/fact-cash-ledger-2026.md",
     "01_Ontology/fact-accumulated-depreciation-2026.md",
     "01_Ontology/def-sbrm-reporting-period.md",
-    "01_Ontology/def-sbrm-reporting-entity.md",
-    "02_Rules/sbrm_kb.pl"
+    "01_Ontology/def-sbrm-reporting-entity.md"
   ]
 }
