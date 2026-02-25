@@ -44,6 +44,66 @@
       }
     },
     {
+      "@id": "section:asset-binder-heavy-duty-002-accumulated",
+      "@type": "ReportSection",
+      "label": {
+        "en": "Asset Binder Heavy Duty 002 Accumulated"
+      },
+      "isPartOf": {
+        "@id": "section:accumulated-depreciation"
+      }
+    },
+    {
+      "@id": "section:asset-binder-heavy-duty-002-cost",
+      "@type": "ReportSection",
+      "label": {
+        "en": "Asset Binder Heavy Duty 002 Cost"
+      },
+      "isPartOf": {
+        "@id": "section:plant-at-cost"
+      }
+    },
+    {
+      "@id": "section:asset-binder-heavy-duty-002-expense",
+      "@type": "ReportSection",
+      "label": {
+        "en": "Asset Binder Heavy Duty 002 Expense"
+      },
+      "isPartOf": {
+        "@id": "section:expenses"
+      }
+    },
+    {
+      "@id": "section:asset-printer-industrial-001-accumulated",
+      "@type": "ReportSection",
+      "label": {
+        "en": "Asset Printer Industrial 001 Accumulated"
+      },
+      "isPartOf": {
+        "@id": "section:accumulated-depreciation"
+      }
+    },
+    {
+      "@id": "section:asset-printer-industrial-001-cost",
+      "@type": "ReportSection",
+      "label": {
+        "en": "Asset Printer Industrial 001 Cost"
+      },
+      "isPartOf": {
+        "@id": "section:plant-at-cost"
+      }
+    },
+    {
+      "@id": "section:asset-printer-industrial-001-expense",
+      "@type": "ReportSection",
+      "label": {
+        "en": "Asset Printer Industrial 001 Expense"
+      },
+      "isPartOf": {
+        "@id": "section:expenses"
+      }
+    },
+    {
       "@id": "section:bank-statement-balance",
       "@type": "ReportSection",
       "label": {
@@ -290,6 +350,84 @@
         },
         "periodType": "instant",
         "as_At": "2026-06-30"
+      }
+    },
+    {
+      "value": 5000.0,
+      "decimals": 2,
+      "unit": "iso4217:AUD",
+      "context": {
+        "parentSection": {
+          "@id": "section:asset-binder-heavy-duty-002-accumulated"
+        },
+        "periodType": "instant",
+        "as_At": "2026-06-30"
+      }
+    },
+    {
+      "value": 20000.0,
+      "decimals": 2,
+      "unit": "iso4217:AUD",
+      "context": {
+        "parentSection": {
+          "@id": "section:asset-binder-heavy-duty-002-cost"
+        },
+        "periodType": "instant",
+        "as_At": "2026-06-30"
+      }
+    },
+    {
+      "value": 5000.0,
+      "decimals": 2,
+      "unit": "iso4217:AUD",
+      "context": {
+        "parentSection": {
+          "@id": "section:asset-binder-heavy-duty-002-expense"
+        },
+        "periodType": "duration",
+        "duration": {
+          "startDate": "2025-07-01",
+          "endDate": "2026-06-30"
+        }
+      }
+    },
+    {
+      "value": 20000.0,
+      "decimals": 2,
+      "unit": "iso4217:AUD",
+      "context": {
+        "parentSection": {
+          "@id": "section:asset-printer-industrial-001-accumulated"
+        },
+        "periodType": "instant",
+        "as_At": "2026-06-30"
+      }
+    },
+    {
+      "value": 80000.0,
+      "decimals": 2,
+      "unit": "iso4217:AUD",
+      "context": {
+        "parentSection": {
+          "@id": "section:asset-printer-industrial-001-cost"
+        },
+        "periodType": "instant",
+        "as_At": "2026-06-30"
+      }
+    },
+    {
+      "value": 20000.0,
+      "decimals": 2,
+      "unit": "iso4217:AUD",
+      "context": {
+        "parentSection": {
+          "@id": "section:asset-printer-industrial-001-expense"
+        },
+        "periodType": "duration",
+        "duration": {
+          "startDate": "2025-07-01",
+          "endDate": "2026-06-30"
+        }
       }
     },
     {

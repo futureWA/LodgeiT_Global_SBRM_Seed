@@ -4,6 +4,9 @@
 ontological_class: "FixedAssetCost"
 gist_equivalent: "gist:Magnitude"
 value: 80000.0
+hypercube_context:
+  primary_hypercube: "StatementOfFinancialPosition"
+  arrangement_pattern: "Hierarchy"
 edges:
   - rel: "sbrm:isInstanceOfConcept"
     target: "urn:uuid:def-sbr-asset-printer-industrial-001-cost"

@@ -324,6 +324,8 @@
   },
   "active": "2b76e18df5f7d164",
   "lastOpenFiles": [
+    "01_Ontology/fact-asset-binder-heavy-duty-002-expense-2026.md",
+    "01_Ontology/fact-asset-printer-industrial-001-expense-2026.md",
     "01_Ontology/fact-asset-binder-heavy-duty-002-accumulated-2026.md",
     "01_Ontology/fact-asset-binder-heavy-duty-002-cost-2026.md",
     "01_Ontology/fact-asset-printer-industrial-001-accumulated-2026.md",
@@ -357,8 +359,6 @@
     "03_Registry/reg-authorities-trusted.md",
     "03_Registry/reg-access-control.md",
     "02_Rules/rule-sbrm-fixed-assets-net.md",
-    "02_Rules/rule-sbrm-asset-rollup.md",
-    "02_Rules/rule-sbrm-accounting-equation.md",
-    "01_Ontology/fact-cash-ledger-2026.md"
+    "02_Rules/rule-sbrm-asset-rollup.md"
   ]
 }

@@ -4,14 +4,12 @@ import hashlib
 
 DIR = './01_Ontology'
 
-def mint_node(asset_id, label, attribute, value, metadata, concept_suffix):
+def mint_node(asset_id, label, attribute, value, metadata, concept_suffix, hypercube, pattern):
     filename = f"fact-asset-{asset_id}-{concept_suffix}-2026.md"
     filepath = os.path.join(DIR, filename)
     
     body = f"# {label} ({attribute})\n{metadata}\n"
     content_hash = hashlib.sha256(body.encode('utf-8')).hexdigest()
-    
-    # Strip spaces for the Ontological Class definition
     onto_class = attribute.replace(' ', '')
     
     frontmatter = f"""---
@@ -20,6 +18,9 @@ def mint_node(asset_id, label, attribute, value, metadata, concept_suffix):
 ontological_class: "FixedAsset{onto_class}"
 gist_equivalent: "gist:Magnitude"
 value: {value}
+hypercube_context:
+  primary_hypercube: "{hypercube}"
+  arrangement_pattern: "{pattern}"
 edges:
   - rel: "sbrm:isInstanceOfConcept"
     target: "urn:uuid:def-sbr-asset-{asset_id}-{concept_suffix}"
@@ -31,10 +32,10 @@ content_hash: "{content_hash}"
 
     with open(filepath, 'w', encoding='utf-8') as f:
         f.write(frontmatter)
-    print(f"[MINTED] {filename} -> ${value}")
+    print(f"[MINTED] {filename} -> ${value} | Hypercube: {hypercube}")
 
 def ingest():
-    print("=== INITIATING SUB-LEDGER ASSET INGESTION (v2) ===")
+    print("=== INITIATING SUB-LEDGER ASSET INGESTION (v3) ===")
     if not os.path.exists('asset_register.json'):
         print("[ERROR] asset_register.json not found.")
         return
@@ -47,14 +48,14 @@ def ingest():
         label = asset['label']
         cost = asset['cost']['value']
         accdep = asset['accumulatedDepreciation']['value']
-        depexp = asset['depreciationExpense']['value'] # <-- NEW P&L EXTRACTION
+        depexp = asset['depreciationExpense']['value']
         
         # Mint Balance Sheet Nodes
-        mint_node(asset_id, label, "Cost", cost, f"Purchase Date: {asset.get('purchaseDate')}", "cost")
-        mint_node(asset_id, label, "Accumulated Depreciation", accdep, f"Method: {asset.get('depreciationMethod')}", "accumulated")
+        mint_node(asset_id, label, "Cost", cost, f"Purchase Date: {asset.get('purchaseDate')}", "cost", "StatementOfFinancialPosition", "Hierarchy")
+        mint_node(asset_id, label, "Accumulated Depreciation", accdep, f"Method: {asset.get('depreciationMethod')}", "accumulated", "StatementOfFinancialPosition", "Hierarchy")
         
         # Mint P&L Node
-        mint_node(asset_id, label, "Depreciation Expense", depexp, f"Method: {asset.get('depreciationMethod')}\nRate: {asset.get('depreciationRate')}", "expense")
+        mint_node(asset_id, label, "Depreciation Expense", depexp, f"Method: {asset.get('depreciationMethod')}\nRate: {asset.get('depreciationRate')}", "expense", "StatementOfComprehensiveIncome", "RollUp")
 
     print("=== FIXED ASSETS & P&L DEPRECIATION INGESTED INTO SBRM GRAPH ===")
 
