@@ -324,6 +324,7 @@
   },
   "active": "2b76e18df5f7d164",
   "lastOpenFiles": [
+    "latest_sbrm_payload.jsonld",
     "02_Rules/rule-sbrm-profit-loss.md",
     "README.md",
     "00_Architecture/journal-phase-5.md",
@@ -357,7 +358,6 @@
     "01_Ontology/fact-accumulated-depreciation-2026.md",
     "01_Ontology/def-sbrm-reporting-period.md",
     "01_Ontology/def-sbrm-reporting-entity.md",
-    "00_Architecture/Journal_phase-1-.md.md",
     "02_Rules/sbrm_kb.pl",
     "prolog_bridge.py"
   ]
