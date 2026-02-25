@@ -324,9 +324,11 @@
   },
   "active": "2b76e18df5f7d164",
   "lastOpenFiles": [
+    "client_relay_ping.py",
+    "New Text Document.txt",
+    "l402_middleware (2).py",
     "01_Ontology/fact-other-current-liabilities-2026.md",
     "consolidate_hypercube.py",
-    "New Text Document.txt",
     "evaluate_oim_report.py",
     "heal_uplift_nodes.py",
     "vault_report_export.jsonld",
@@ -356,9 +358,7 @@
     "02_Rules/sbrm_kb.pl",
     "prolog_bridge.py",
     "vault_state_export.json",
-    "extract_vault_state.py",
     "01_Ontology/fact-current-liabilities-2026.md",
-    "00_Architecture/Genesis_Node.md",
-    "01_Ontology/fact-uplift-capital-introduced-2026.md"
+    "00_Architecture/Genesis_Node.md"
   ]
 }

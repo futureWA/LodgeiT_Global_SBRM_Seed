@@ -1,105 +1,61 @@
-import os
-import yaml
-import hashlib
-import secrets
-import logic # Imports your newly minted Universal Logic Engine
+import http.server
+import socketserver
+import json
+import subprocess
 
-REGISTRY_PATH = r"C:\Users\futur\Documents\LodgeiT_Global\03_Registry\reg-access-control.md"
+PORT = 8021
+MOCK_MACAROON = "AgEEbHNhdA_LodgeiT_Gateway_Token_x9f"
+MOCK_INVOICE = "lnbc10u1p3j...[Lightning_Invoice]...000sats"
+VALID_PREIMAGE = "00112233445566778899aabbccddeeff"
 
-def load_l402_registry():
-    """Reads the L402 pricing and access tiers from the SBRM Registry."""
-    if not os.path.exists(REGISTRY_PATH):
-        print("[!] Access Control Registry missing. Cannot initialize L402 gateway.")
-        return None
-        
-    with open(REGISTRY_PATH, 'r', encoding='utf-8') as f:
-        content = f.read()
-        parts = content.split('---')
-        if len(parts) >= 3:
-            return yaml.safe_load(parts[1])
-    return None
-
-def generate_mock_lightning_invoice(amount_sats):
-    """
-    Simulates a Lightning Node generating an invoice.
-    In production, this calls an LND or Core Lightning REST API.
-    """
-    preimage = secrets.token_hex(32)
-    payment_hash = hashlib.sha256(preimage.encode('utf-8')).hexdigest()
-    invoice = f"lnbc{amount_sats}n1mockinvoice{secrets.token_hex(16)}"
-    return invoice, payment_hash, preimage
-
-def generate_macaroon(tier, caveat):
-    """
-    Generates a cryptographically signed bearer token (Macaroon) 
-    that binds the payment hash to the specific SBRM execution rights.
-    """
-    # Simplified mock macaroon for architectural demonstration
-    raw_token = f"macaroon:{tier}:{caveat}:{secrets.token_hex(8)}"
-    return hashlib.sha256(raw_token.encode('utf-8')).hexdigest()
-
-def handle_api_request(tier_name, provided_macaroon=None, provided_preimage=None):
-    """
-    The main L402 Gateway. Simulates an incoming API request to the global fleet.
-    """
-    print(f"\n>>> INCOMING REQUEST: API Tier '{tier_name}'")
-    registry = load_l402_registry()
-    
-    if not registry or 'api_tiers' not in registry or tier_name not in registry['api_tiers']:
-        print("  [HTTP 404] Requested SBRM service tier not found in registry.")
-        return
-
-    tier_data = registry['api_tiers'][tier_name]
-    cost = tier_data.get('cost_per_query_sats', 0)
-    caveat = tier_data.get('macaroon_caveat', '')
-
-    # 1. Check if this is an unauthenticated initial request
-    if not provided_macaroon or not provided_preimage:
-        print(f"  [AUTH FAILED] No valid Macaroon or Preimage provided.")
-        
-        # Generate the Lightning Challenge
-        invoice, payment_hash, expected_preimage = generate_mock_lightning_invoice(cost)
-        macaroon = generate_macaroon(tier_name, caveat)
-        
-        print("\n<<< [HTTP 402] PAYMENT REQUIRED")
-        print(f"    WWW-Authenticate: L402 macaroon=\"{macaroon}\", invoice=\"{invoice}\"")
-        print(f"    Sats Required: {cost}")
-        print(f"    Scope Caveat: {caveat}")
-        
-        # We return the expected preimage here just to simulate the user paying the invoice
-        return macaroon, expected_preimage 
-
-    # 2. Check Authentication (Simulating the user returning with proof of payment)
-    else:
-        print("  [VERIFYING] Client returned with Macaroon and Proof of Payment (Preimage)...")
-        
-        # In a real system, the Lightning Node validates the preimage against the payment hash.
-        # Here we just assume if they have the preimage, they paid the invoice.
-        if provided_preimage: 
-            print("  [L402 AUTH OK] Lightning settlement confirmed. Cryptographic caveat matches.")
-            print("\n  [SYSTEM WAKE] Handing execution over to LodgeiT SBRM Logic Engine...")
-            print("="*60)
+class L402Handler(http.server.SimpleHTTPRequestHandler):
+    def do_GET(self):
+        if self.path == '/api/v1/evaluate':
+            auth_header = self.headers.get('Authorization')
             
-            # Execute the core engine
-            logic.run_universal_logic_engine(r"C:\Users\futur\Documents\LodgeiT_Global")
-            
-            print("="*60)
-            print("<<< [HTTP 200] SUCCESS. SBRM Proof Delivered.")
-        else:
-            print("<<< [HTTP 401] UNAUTHORIZED. Invalid Preimage.")
+            # Step 1: Intercept unauthenticated requests and issue Lightning Invoice
+            if not auth_header or not auth_header.startswith('L402'):
+                self.send_response(402)
+                self.send_header('WWW-Authenticate', f'L402 macaroon="{MOCK_MACAROON}", invoice="{MOCK_INVOICE}"')
+                self.end_headers()
+                self.wfile.write(b'{"error": "Payment Required", "cost": "1000 sats"}')
+                print("\n[L402 GATEWAY] 402 Payment Required - Lightning Invoice Issued.")
+                return
 
-if __name__ == "__main__":
-    print("--- LodgeiT / ClientRelay L402 API Gateway Initialized ---")
-    
-    # SIMULATION FLOW:
-    
-    # Step 1: External App (e.g., a custom Stripe integration) requests a complex rollup
-    macaroon, expected_preimage = handle_api_request("Complex_Fanout")
-    
-    # Step 2: The External App pays the Lightning Invoice (Simulated by a pause)
-    import time
-    print("\n... External Client is paying the Lightning Invoice via their Node ...")
-    time.sleep(2)
-    
-    # Step 3: External App retries the request, attaching the Macaroon and Preimage
-    handle_api_request("Complex_Fanout", provided_macaroon=macaroon, provided_preimage=expected_preimage)
+            # Step 2: Validate the cryptographic preimage
+            parts = auth_header.split(' ')
+            if len(parts) == 2:
+                token = parts[1]
+                try:
+                    macaroon, preimage = token.split(':')
+                except ValueError:
+                    self.send_error(400, "Malformed L402 Token")
+                    return
+                
+                if macaroon == MOCK_MACAROON and preimage == VALID_PREIMAGE:
+                    print("\n[L402 GATEWAY] Cryptographic Payment Verified (1000 Sats).")
+                    print("[L402 GATEWAY] Booting SWI-Prolog Engine for Proof Execution...")
+                    
+                    # Execute the deterministic logic engine
+                    result = subprocess.run(['python', 'evaluate_oim_report.py'], capture_output=True, text=True)
+                    
+                    self.send_response(200)
+                    self.send_header('Content-type', 'application/json')
+                    self.end_headers()
+                    
+                    payload = {
+                        "status": "success",
+                        "settlement": "1000 sats",
+                        "proof_output": result.stdout
+                    }
+                    self.wfile.write(json.dumps(payload).encode())
+                    return
+                    
+            self.send_response(401)
+            self.end_headers()
+            self.wfile.write(b'{"error": "Unauthorized / Invalid Lightning Preimage"}')
+
+print(f"=== LODGEIT GLOBAL: L402 PAYMENT GATEWAY ONLINE (Port {PORT}) ===")
+print("Awaiting ClientRelay requests...")
+with socketserver.TCPServer(("", PORT), L402Handler) as httpd:
+    httpd.serve_forever()
