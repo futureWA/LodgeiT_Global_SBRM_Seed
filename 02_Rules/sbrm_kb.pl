@@ -97,4 +97,61 @@ validate_equity_roll_forward :-
         fail
     ).
 
+% Rule: rule-sbrm-net-profit
+validate_net_profit(Entity, Period) :-
+    sbrm_fact(Entity, Period, 'urn:uuid:def-sbr-revenue', Revenue, _, 'RollUp'),
+    sbrm_fact(Entity, Period, 'urn:uuid:def-sbr-expenses', Expenses, _, 'RollUp'),
+    sbrm_fact(Entity, Period, 'urn:uuid:def-sbr-profit-loss', PL, _, 'RollUp'),
+    PL =:= Revenue - Expenses.
 
+% Rule: rule-sbrm-revenue-breakdown
+validate_revenue_breakdown(Entity, Period) :-
+    sbrm_fact(Entity, Period, 'urn:uuid:def-sbr-revenue-blue', RevBlue, _, 'RollUp'),
+    sbrm_fact(Entity, Period, 'urn:uuid:def-sbr-revenue-green', RevGreen, _, 'RollUp'),
+    sbrm_fact(Entity, Period, 'urn:uuid:def-sbr-revenue-red', RevRed, _, 'RollUp'),
+    sbrm_fact(Entity, Period, 'urn:uuid:def-sbr-revenue-yellow', RevYellow, _, 'RollUp'),
+    sbrm_fact(Entity, Period, 'urn:uuid:def-sbr-revenue', TotalRevenue, _, 'RollUp'),
+    TotalRevenue =:= RevBlue + RevGreen + RevRed + RevYellow.
+
+% --- 3. HEALTH CHECK WRAPPER ---
+
+run_health_checks :-
+    write('========================================='), nl,
+    write('      SBRM HEALTH CHECK REPORT           '), nl,
+    write('========================================='), nl,
+    
+    Entity = 'urn:uuid:def-sbrm-reporting-entity',
+    InstantPeriod = 'urn:uuid:def-sbrm-reporting-period',
+    DurationPeriod = 'urn:uuid:def-sbrm-reporting-period-2026-duration',
+
+    % Check 1: Accounting Equation
+    ( is_balanced(Entity, InstantPeriod) ->
+        write('[PASS] Accounting Equation (A = L + E)'), nl
+    ;   write('[FAIL] Accounting Equation (A = L + E)'), nl
+    ),
+
+    % Check 2: Asset Rollup
+    ( validate_asset_rollup(Entity, InstantPeriod) ->
+        write('[PASS] Asset Rollup (CA + NCA = TA)'), nl
+    ;   write('[FAIL] Asset Rollup (CA + NCA = TA)'), nl
+    ),
+
+    % Check 3: Equity Roll-forward
+    ( validate_equity_rollforward_v2(Entity) ->
+        write('[PASS] Equity Roll-forward (Open + P&L - Div = Close)'), nl
+    ;   write('[FAIL] Equity Roll-forward (Open + P&L - Div = Close)'), nl
+    ),
+    
+    % Check 4: Net Profit
+    ( validate_net_profit(Entity, DurationPeriod) ->
+        write('[PASS] Net Profit (Revenue - Expenses = P&L)'), nl
+    ;   write('[FAIL] Net Profit (Revenue - Expenses = P&L)'), nl
+    ),
+
+    % Check 5: Revenue Breakdown
+    ( validate_revenue_breakdown(Entity, DurationPeriod) ->
+        write('[PASS] Revenue Breakdown (Sum of slices = Total Revenue)'), nl
+    ;   write('[FAIL] Revenue Breakdown (Sum of slices = Total Revenue)'), nl
+    ),
+    
+    write('========================================='), nl.
