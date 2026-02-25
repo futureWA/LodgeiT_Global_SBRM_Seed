@@ -6,7 +6,7 @@ def load_report(filepath):
         return json.load(f)
 
 def evaluate_report(report):
-    print("\n=== SBRM & OIM MULTIDIMENSIONAL REASONER (v2.0) ===")
+    print("\n=== SBRM & OIM MULTIDIMENSIONAL REASONER (v2.1) ===")
     
     facts = report.get('facts', [])
     structure = report.get('reportStructure', [])
@@ -50,19 +50,20 @@ def evaluate_report(report):
     
     assets_asserted = get_asserted_value('section:total-assets')
     assets_calc = get_calculated_value('section:total-assets')
-    
     liab_asserted = get_asserted_value('section:total-liabilities')
     liab_calc = get_calculated_value('section:total-liabilities')
+    pl_asserted = get_asserted_value('section:profit-loss')
+    pl_calc = get_calculated_value('section:profit-loss')
     
-    if assets_asserted == assets_calc:
-        print(f"[PASS] Asset Hierarchy sums perfectly ({assets_asserted}).")
-    else:
-        print(f"[WARN] Asset Hierarchy mismatch! Asserted: {assets_asserted} | Calculated from Leaves: {assets_calc}")
+    if assets_asserted == assets_calc: print(f"[PASS] Asset Hierarchy sums perfectly ({assets_asserted}).")
+    else: print(f"[WARN] Asset Hierarchy mismatch! Asserted: {assets_asserted} | Calculated from Leaves: {assets_calc}")
 
-    if liab_asserted == liab_calc:
-        print(f"[PASS] Liability Hierarchy sums perfectly ({liab_asserted}).")
-    else:
-        print(f"[WARN] Liability Hierarchy mismatch! Asserted: {liab_asserted} | Calculated from Leaves: {liab_calc}")
+    if liab_asserted == liab_calc: print(f"[PASS] Liability Hierarchy sums perfectly ({liab_asserted}).")
+    else: print(f"[WARN] Liability Hierarchy mismatch! Asserted: {liab_asserted} | Calculated from Leaves: {liab_calc}")
+
+    # NEW: P&L Hierarchy Check
+    if pl_asserted == pl_calc: print(f"[PASS] P&L Hierarchy sums perfectly ({pl_asserted}).")
+    else: print(f"[WARN] P&L Hierarchy mismatch! Asserted: {pl_asserted} | Calculated from Leaves: {pl_calc}")
 
     # --- LAYER C: ACCOUNTING LOGIC ---
     print("\n--- Layer C: Multidimensional Accounting Logic ---")
@@ -74,20 +75,27 @@ def evaluate_report(report):
     else:
         print(f"[FAIL] Rule C.1: Core Accounting Equation Broken.")
 
-    # Rule C.2: Strict Temporal Roll-Forward
     opening = get_asserted_value('section:opening-equity')
     cap_intro = get_asserted_value('section:capital-introduced')
     ret_earn = get_asserted_value('section:retained-earnings')
-    pl = get_asserted_value('section:profit-loss')
-    dividends = get_asserted_value('section:dividends-paid') * -1.0  # Apply contra weighting
+    dividends = get_asserted_value('section:dividends-paid') * -1.0  
     
-    calc_close = opening + cap_intro + ret_earn + pl + dividends
+    calc_close = opening + cap_intro + ret_earn + pl_asserted + dividends
     
     if abs(calc_close - equity_asserted) < 0.01:
         print(f"[PASS] Rule C.2: Temporal Roll-Forward Valid.")
-        print(f"       -> Open ({opening}) + CapInt ({cap_intro}) + RetEarn ({ret_earn}) + P&L ({pl}) + Div ({dividends}) = Close ({equity_asserted}).")
+        print(f"       -> Open ({opening}) + CapInt ({cap_intro}) + RetEarn ({ret_earn}) + P&L ({pl_asserted}) + Div ({dividends}) = Close ({equity_asserted}).")
     else:
-        print(f"[FAIL] Rule C.2: Roll-Forward calculation mismatch. Expected {calc_close}, Got {equity_asserted}")
+        print(f"[FAIL] Rule C.2: Roll-Forward calculation mismatch.")
+
+    # NEW: Rule C.3 - P&L Articulation
+    rev_calc = get_calculated_value('section:revenue')
+    exp_calc = get_calculated_value('section:expenses') * -1.0 # Reverse weight for display
+    
+    if abs((rev_calc - exp_calc) - pl_asserted) < 0.01:
+        print(f"[PASS] Rule C.3: P&L Articulation Valid. Rev ({rev_calc}) - Exp ({exp_calc}) = P&L ({pl_asserted}).")
+    else:
+        print(f"[FAIL] Rule C.3: P&L Articulation Broken! Rev ({rev_calc}) - Exp ({exp_calc}) != P&L ({pl_asserted}).")
         
     print("\n=== EVALUATION COMPLETE ===\n")
 
