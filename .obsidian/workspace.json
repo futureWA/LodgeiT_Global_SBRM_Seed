@@ -324,6 +324,10 @@
   },
   "active": "2b76e18df5f7d164",
   "lastOpenFiles": [
+    "02_Rules/rule-sbrm-profit-loss.md",
+    "README.md",
+    "00_Architecture/journal-phase-5.md",
+    "00_Architecture/journal-phase-3-4.md",
     "00_Architecture/L402-gateway.md",
     "00_Architecture/journal-phase-2.md",
     "client_relay_ping.py",
@@ -335,7 +339,6 @@
     "heal_uplift_nodes.py",
     "vault_report_export.jsonld",
     "export_jsonld_report.py",
-    "00_Architecture/journal-phase-3.md",
     "00_Architecture/Journal_phase-1.md",
     "02_Rules/rule-ato-instant-asset-writeoff.md",
     "03_Registry/registry-namespace-au.md",
@@ -343,7 +346,6 @@
     "00_Architecture/Architecture_Service_Distribution.md",
     "00_Architecture/Architecture_SBRM.md",
     "00_Architecture/Architecture_Cryptographic_Sovereignty.md",
-    "README.md",
     "03_Registry/registry-sbrm-master-ruleset.md",
     "03_Registry/reg-namespaces-core.md",
     "03_Registry/reg-authorities-trusted.md",
@@ -357,8 +359,6 @@
     "01_Ontology/def-sbrm-reporting-entity.md",
     "00_Architecture/Journal_phase-1-.md.md",
     "02_Rules/sbrm_kb.pl",
-    "prolog_bridge.py",
-    "01_Ontology/fact-current-liabilities-2026.md",
-    "00_Architecture/Genesis_Node.md"
+    "prolog_bridge.py"
   ]
 }
