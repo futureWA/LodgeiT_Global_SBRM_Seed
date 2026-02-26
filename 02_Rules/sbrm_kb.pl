@@ -69,34 +69,6 @@ calculate_iawo_deduction(Entity, Period, Deduction) :-
     sbrm_fact(Entity, Period, 'urn:uuid:def-sbr-plant-at-cost', AssetCost, 'AUD', 'Hierarchy'), 
     ( AssetCost =< 20000.0 -> Deduction = AssetCost ; Deduction = 0.0 ). 
 
-% Custom Rule C.2: Validate Equity Roll-Forward
-validate_equity_roll_forward :-
-    % 1. Fetch Opening Balance
-    get_recursive_section_value('section:opening-equity', OpeningEquity),
-    
-    % 2. Fetch Equity Movements (Flows)
-    get_recursive_section_value('section:capital-introduced', Capital),
-    get_recursive_section_value('section:retained-earnings', Earnings),
-    get_recursive_section_value('section:dividends-paid', Dividends), % Assuming standard subtraction for dividends
-    
-    % 3. Fetch Closing Balance (Total Equity)
-    get_recursive_section_value('section:total-equity', ClosingEquity),
-
-    % 4. Verify Temporal Types (Strict OIM Requirement)
-    section_has_type('section:opening-equity', 'instant'),
-    section_has_type('section:total-equity', 'instant'),
-
-    % 5. Calculate & Check
-    % Formula: Opening + Capital + Earnings - Dividends = Closing
-    CalculatedClosing is OpeningEquity + Capital + Earnings - Dividends,
-    
-    ( abs(CalculatedClosing - ClosingEquity) < 0.01 ->
-        format('PASS: Equity Roll-forward valid. Calculated: ~w, Reported: ~w.', [CalculatedClosing, ClosingEquity])
-    ;
-        format('FAIL: Equity Roll-forward mismatch! Calculated ~w does not equal Reported ~w.', [CalculatedClosing, ClosingEquity]),
-        fail
-    ).
-
 % Rule: rule-sbrm-net-profit
 validate_net_profit(Entity, Period) :-
     sbrm_fact(Entity, Period, 'urn:uuid:def-sbr-revenue', Revenue, _, 'RollUp'),
@@ -170,3 +142,11 @@ generate_branch_structure(Node, Indent) :-
     tab(Indent), write('-> '), write(Node), nl,
     NewIndent is Indent + 4,
     forall(sbrm_parent(Child, Node), generate_branch_structure(Child, NewIndent)).
+
+sbrm_parent('urn:uuid:def-sbr-current-liabilities', 'urn:uuid:def-sbr-total-liabilities').
+sbrm_parent('urn:uuid:def-sbr-non-current-liabilities', 'urn:uuid:def-sbr-total-liabilities').
+
+
+
+
+
