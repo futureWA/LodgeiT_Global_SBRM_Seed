@@ -64,20 +64,6 @@
             }
           },
           {
-            "id": "5bc6472f0aa12954",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "01_Ontology/fact-cash-ledger-2026.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "fact-cash-ledger-2026"
-            }
-          },
-          {
             "id": "73aa7180171e1673",
             "type": "leaf",
             "state": {
@@ -153,16 +139,16 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "01_Ontology/def-sbrm-reporting-entity.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "README"
+              "title": "def-sbrm-reporting-entity"
             }
           }
         ],
-        "currentTab": 10
+        "currentTab": 9
       }
     ],
     "direction": "vertical"
@@ -324,41 +310,41 @@
   },
   "active": "2b76e18df5f7d164",
   "lastOpenFiles": [
+    "README.md",
+    "01_Ontology/fact-uplift-sales-revenue-2026.md",
+    "01_Ontology/fact-uplift-retained-earnings-2026.md",
+    "01_Ontology/fact-uplift-operating-expenses-2026.md",
+    "01_Ontology/fact-uplift-nab-5510-2026.md",
+    "01_Ontology/fact-uplift-cash-at-bank-2026.md",
+    "01_Ontology/fact-uplift-capital-introduced-2026.md",
+    "01_Ontology/fact-uplift-accounts-receivable-2026.md",
+    "01_Ontology/fact-uplift-accounts-payable-2026.md",
+    "01_Ontology/fact-total-liabilities-2026.md",
+    "01_Ontology/fact-total-equity-2026.md",
+    "01_Ontology/fact-total-assets-2026.md",
+    "01_Ontology/fact-dividends-paid-2026.md",
+    "01_Ontology/fact-current-liabilities-2026.md",
+    "01_Ontology/fact-current-assets-2026.md",
+    "01_Ontology/fact-cash-ledger-2026.md",
+    "01_Ontology/fact-asset-printer-industrial-001-expense-2026.md",
+    "01_Ontology/fact-asset-printer-industrial-001-cost-2026.md",
+    "01_Ontology/fact-asset-printer-industrial-001-accumulated-2026.md",
+    "01_Ontology/fact-asset-binder-heavy-duty-002-expense-2026.md",
+    "01_Ontology/fact-asset-binder-heavy-duty-002-cost-2026.md",
+    "01_Ontology/fact-asset-binder-heavy-duty-002-accumulated-2026.md",
+    "01_Ontology/fact-accumulated-depreciation-2026.md",
+    "App.py",
+    "01_Ontology/wp-bank-statement-2026.md",
+    "01_Ontology/fact-lodgeit-accounting-fees-2024.md",
+    "01_Ontology/fact-lodgeit-accounting-fees-2025.md",
+    "mapper.csv",
+    "financials.csv",
     "LodgeiT_Ingestion_Agent.py",
     "New Text Document.txt",
     "app.py",
-    "App.py",
     "Phase 1 The Gateway (Residency) and associated non residency qs.txt",
-    "01_Ontology/fact-other-expenses-2026.md",
     "heal_expenses.py",
-    "01_Ontology/fact-asset-binder-heavy-duty-002-expense-2026.md",
-    "01_Ontology/fact-asset-printer-industrial-001-expense-2026.md",
-    "01_Ontology/fact-asset-binder-heavy-duty-002-accumulated-2026.md",
-    "01_Ontology/fact-asset-binder-heavy-duty-002-cost-2026.md",
-    "01_Ontology/fact-asset-printer-industrial-001-accumulated-2026.md",
-    "01_Ontology/fact-asset-printer-industrial-001-cost-2026.md",
     "ingest_assets.py",
-    "asset_register.json",
-    "latest_sbrm_payload.jsonld",
-    "02_Rules/rule-sbrm-profit-loss.md",
-    "README.md",
-    "00_Architecture/journal-phase-5.md",
-    "00_Architecture/journal-phase-3-4.md",
-    "00_Architecture/L402-gateway.md",
-    "00_Architecture/journal-phase-2.md",
-    "client_relay_ping.py",
-    "l402_middleware (2).py",
-    "01_Ontology/fact-other-current-liabilities-2026.md",
-    "00_Architecture/Journal_phase-1.md",
-    "02_Rules/rule-ato-instant-asset-writeoff.md",
-    "03_Registry/registry-namespace-au.md",
-    "00_Architecture/Architecture_System_Manifest.md",
-    "00_Architecture/Architecture_Service_Distribution.md",
-    "00_Architecture/Architecture_SBRM.md",
-    "00_Architecture/Architecture_Cryptographic_Sovereignty.md",
-    "03_Registry/registry-sbrm-master-ruleset.md",
-    "03_Registry/reg-namespaces-core.md",
-    "03_Registry/reg-authorities-trusted.md",
-    "03_Registry/reg-access-control.md"
+    "asset_register.json"
   ]
 }
