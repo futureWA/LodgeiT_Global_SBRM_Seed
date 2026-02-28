@@ -338,6 +338,8 @@
   },
   "active": "123ad21752713224",
   "lastOpenFiles": [
+    "prolog_app.py",
+    "New Text Document.txt",
     "02_Rules/sbrm_kb.pl",
     "02_Rules/New Text Document.txt",
     "02_Rules/rule-ato-instant-asset-writeoff.md",
@@ -371,8 +373,6 @@
     "App.py",
     "mapper.csv",
     "financials.csv",
-    "LodgeiT_Ingestion_Agent.py",
-    "New Text Document.txt",
-    "app.py"
+    "LodgeiT_Ingestion_Agent.py"
   ]
 }
