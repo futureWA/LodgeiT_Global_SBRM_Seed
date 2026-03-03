@@ -338,8 +338,9 @@
   },
   "active": "123ad21752713224",
   "lastOpenFiles": [
-    "prolog_app.py",
+    "hmrc_test.py",
     "New Text Document.txt",
+    "prolog_app.py",
     "02_Rules/sbrm_kb.pl",
     "02_Rules/New Text Document.txt",
     "02_Rules/rule-ato-instant-asset-writeoff.md",
@@ -372,7 +373,6 @@
     "01_Ontology/fact-asset-printer-industrial-001-cost-2026.md",
     "App.py",
     "mapper.csv",
-    "financials.csv",
-    "LodgeiT_Ingestion_Agent.py"
+    "financials.csv"
   ]
 }
