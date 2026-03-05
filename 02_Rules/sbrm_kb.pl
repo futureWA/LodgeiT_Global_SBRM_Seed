@@ -3,6 +3,7 @@
 % LAYER: LOGIC & INFERENCE (SWI-PROLOG)
 % =========================================================
 
+:- dynamic sbrm_edge/4.
 :- dynamic sbrm_fact/6.
 :- discontiguous sbrm_parent/2.
 
@@ -102,5 +103,55 @@ sbrm_parent('urn:uuid:def-sbr-profit-loss', 'urn:uuid:def-sbr-total-equity').
 sbrm_parent('urn:uuid:def-sbr-dividends-paid', 'urn:uuid:def-sbr-total-equity').
 sbrm_parent('urn:uuid:def-sbr-current-liabilities', 'urn:uuid:def-sbr-total-liabilities').
 sbrm_parent('urn:uuid:def-sbr-non-current-liabilities', 'urn:uuid:def-sbr-total-liabilities').
+
+% =============================================================================
+% MASTER HEALTH CHECK & BRANCH REASONER
+% =============================================================================
+
+run_health_checks :-
+    writeln('========================================='),
+    writeln('        SBRM HEALTH CHECK REPORT         '),
+    writeln('========================================='),
+    
+    % 1. Accounting Equation
+    (   is_balanced('urn:uuid:def-sbrm-reporting-entity', 'urn:uuid:def-sbrm-reporting-period')
+    ->  writeln('[PASS] Accounting Equation (A = L + E)')
+    ;   writeln('[FAIL] Accounting Equation Broken')
+    ),
+    
+    % 2. Asset Rollup
+    (   validate_asset_rollup('urn:uuid:def-sbrm-reporting-entity', 'urn:uuid:def-sbrm-reporting-period')
+    ->  writeln('[PASS] Asset Rollup (CA + NCA = TA)')
+    ;   writeln('[FAIL] Asset Rollup Broken')
+    ),
+    
+    % 3. Net Profit
+    (   validate_net_profit('urn:uuid:def-sbrm-reporting-entity', 'urn:uuid:def-sbrm-reporting-period-2026-duration')
+    ->  writeln('[PASS] Net Profit (Revenue - Expenses = P&L)')
+    ;   writeln('[FAIL] Net Profit Broken')
+    ),
+    
+    % 4. Revenue Fan-out
+    (   validate_revenue_breakdown('urn:uuid:def-sbrm-reporting-entity', 'urn:uuid:def-sbrm-reporting-period-2026-duration')
+    ->  writeln('[PASS] Revenue Breakdown (Sum of slices = Total)')
+    ;   writeln('[FAIL] Revenue Breakdown Broken')
+    ),
+    writeln('=========================================').
+
+% Recursive Branch Structure Generator
+generate_branch_structure(TargetUUID, IndentLevel) :-
+    % Print the current node with indentation
+    tab(IndentLevel), write('-> '), writeln(TargetUUID),
+    
+    % Find all children where the TargetUUID is the parent/total
+    % (Assuming your data structure uses sbrm_edge for parent-child relations)
+    % Adjust the edge name 'sbrm:isRollupOf' if your ontology uses a different predicate.
+    forall(
+        sbrm_edge(_, 'sbrm:isRollupOf', TargetUUID, ChildUUID),
+        (
+            NextIndent is IndentLevel + 4,
+            generate_branch_structure(ChildUUID, NextIndent)
+        )
+    ).
 
 % --- END OF FILE ---
