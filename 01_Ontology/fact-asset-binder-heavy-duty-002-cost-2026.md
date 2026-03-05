@@ -12,7 +12,10 @@ edges:
     target: "urn:uuid:def-sbr-asset-binder-heavy-duty-002-cost"
   - rel: "sbrm:hasReportingEntity"
     target: "urn:uuid:def-sbrm-reporting-entity"
-content_hash: "f018b592bc4934fbb24a6a18aa92e1a0f70eef3911e43b364f884dc651afe855"
+integrity:
+  content_hash: "[SHA-256 injected at commit]"
 ---
 # Heavy Duty Thermal Binder (Cost)
 Purchase Date: 2025-07-01
+
+

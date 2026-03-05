@@ -12,7 +12,7 @@ hypercube_context:
   arrangement_pattern: RollUp
 integrity:
   source_uri: null
-  content_hash: b2b0bc492c57a6132512366355f112708d900a3668f4956a8fd6c3c4a91860c5
+  content_hash: "[SHA-256 injected at commit]"
 parameters_exposed: {}
 fact_value: 80000.0
 fact_unit: AUD

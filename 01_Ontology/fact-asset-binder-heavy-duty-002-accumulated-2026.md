@@ -4,6 +4,7 @@
 ontological_class: "FixedAssetAccumulatedDepreciation"
 gist_equivalent: "gist:Magnitude"
 value: 5000.0
+parameters_exposed: null
 hypercube_context:
   primary_hypercube: "StatementOfFinancialPosition"
   arrangement_pattern: "Hierarchy"
@@ -12,7 +13,9 @@ edges:
     target: "urn:uuid:def-sbr-asset-binder-heavy-duty-002-accumulated"
   - rel: "sbrm:hasReportingEntity"
     target: "urn:uuid:def-sbrm-reporting-entity"
-content_hash: "934d2d10ee7cb3a4323266aeb98d9a3f848336b7fdf4ab234033dd5d694d3863"
+integrity:
+  content_hash: "[SHA-256 injected at commit]"
 ---
+
 # Heavy Duty Thermal Binder (Accumulated Depreciation)
 Method: Diminishing Value

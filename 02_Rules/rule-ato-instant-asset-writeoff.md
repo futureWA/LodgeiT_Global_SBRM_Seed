@@ -1,7 +1,7 @@
 ---
 '@context': ipfs://bafkreifcontext...[Base_Context]
 '@id': urn:uuid:rule-ato-instant-asset-writeoff
-ontological_class: JurisdictionalDirective
+ontological_class: CalculationRule
 gist_equivalent: gist:Directive
 domain_tags:
 - SBRM

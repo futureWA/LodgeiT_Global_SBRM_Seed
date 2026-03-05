@@ -1,9 +1,11 @@
 ---
 "@id": "urn:uuid:service-distribution-layer-lodgeit-global"
-ontological_class: "DistributionDirective"
+ontological_class: "Documentation"
 gist_equivalent: "gist:Service"
 service_type: "Logic-as-a-Service (LaaS)"
 access_protocol: "L402 / Lightning Network"
+integrity:
+  content_hash: "[SHA-256 injected at commit]"
 ---
 
 # Service Distribution: LodgeiT Global Logic Fleet
@@ -15,8 +17,6 @@ External consumers do not need to understand SBRM or Prolog. They simply "POST" 
 * **Ingestion:** API Gateway (AWS) accepts JSON-LD facts.
 * **Processing:** Warm-start SWI-Prolog Lambda functions.
 * **Caching:** Results stored in the Global SBRM Caching Tier for rapid re-validation.
-
-
 
 ## 2. Monetization & Access (L402)
 To ensure this is a "Global Fleet," access is governed by the **L402 protocol** (formerly LSAT):

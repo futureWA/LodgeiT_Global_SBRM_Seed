@@ -7,15 +7,7 @@ domain_tags:
 - SBRM
 - BalanceSheet
 execution_parameters: {}
-parameters_exposed:
-  fact_value:
-    sbrm_label: sbrm:FactValue
-  fact_unit:
-    sbrm_label: sbrm:FactUnit
-  fact_decimals:
-    sbrm_label: sbrm:FactDecimals
-  fact_rounding:
-    sbrm_label: sbrm:FactRounding
+parameters_exposed: null
 fact_value: 75000.0
 fact_unit: AUD
 fact_decimals: 2
@@ -34,7 +26,7 @@ integrity:
   source_authority: nostr:pubkey:a1b2c3d4...[LodgeiT_Hex_Pubkey]
   staleness_flag: false
   source_uri: null
-  content_hash: 23dd3c1ffb3df56c7ba668799362ffeba19586f476befe47b11c49c4e708bfd3
+  content_hash: "[SHA-256 injected at commit]"
 ---
 
 # Fact: Non-Current Assets

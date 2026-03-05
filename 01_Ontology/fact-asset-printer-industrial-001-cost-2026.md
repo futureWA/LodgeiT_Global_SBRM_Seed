@@ -12,7 +12,9 @@ edges:
     target: "urn:uuid:def-sbr-asset-printer-industrial-001-cost"
   - rel: "sbrm:hasReportingEntity"
     target: "urn:uuid:def-sbrm-reporting-entity"
-content_hash: "aa52789b84f3d5a23a45d8b159f3bc6bd4f6671cf7bb22c0967b4b087d822f3d"
+integrity:
+  content_hash: "[SHA-256 injected at commit]"
 ---
 # Industrial 3D Printer (Cost)
 Purchase Date: 2025-07-01
+

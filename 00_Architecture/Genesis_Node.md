@@ -1,7 +1,7 @@
 ---
 "@context": "ipfs://bafkreifcontext...[Base_Context]"
 "@id": "urn:uuid:genesis-seed-neurosemantic-architecture"
-ontological_class: "SystemAxiom"
+ontological_class: "Documentation"
 gist_equivalent: "gist:Intention"
 domain_tags: 
   - "LodgeiT"

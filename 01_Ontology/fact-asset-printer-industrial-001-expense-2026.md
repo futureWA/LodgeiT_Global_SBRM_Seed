@@ -12,8 +12,11 @@ edges:
     target: "urn:uuid:def-sbr-asset-printer-industrial-001-expense"
   - rel: "sbrm:hasReportingEntity"
     target: "urn:uuid:def-sbrm-reporting-entity"
-content_hash: "1e6aae15729d9dc93d8bf05ad7d974cdc66fa2442314af96bf5065cbdcbae0b5"
+integrity:
+  content_hash: "[SHA-256 injected at commit]"
 ---
 # Industrial 3D Printer (Depreciation Expense)
 Method: Diminishing Value
 Rate: 0.25
+
+

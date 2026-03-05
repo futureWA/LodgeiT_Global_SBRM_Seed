@@ -1,7 +1,7 @@
 ---
 "@context": "ipfs://bafkreifcontext...[Base_Context]"
 "@id": "urn:uuid:journal-phase3-4-prolog-jurisdiction"
-ontological_class: "SystemJournal"
+ontological_class: "Documentation"
 gist_equivalent: "gist:HistoricalEvent"
 domain_tags: 
   - "LodgeiT"

@@ -11,7 +11,7 @@ hypercube_context:
   arrangement_pattern: Hierarchy
 integrity:
   source_uri: null
-  content_hash: 8b5ec9aeb30ae82c3e4872ef9ec15fe9f644fcc7d58c1cb0388c5169956a95d5
+  content_hash: "[SHA-256 injected at commit]"
 parameters_exposed: {}
 fact_value: 30000.0
 fact_unit: AUD

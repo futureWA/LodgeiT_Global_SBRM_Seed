@@ -1,7 +1,7 @@
 ---
 "@context": "ipfs://bafkreifcontext...[Base_Context]"
 "@id": "urn:uuid:sys-boot-sequence-sbrm-os-hypercube"
-ontological_class: "SystemManifest"
+ontological_class: "Documentation"
 gist_equivalent: "gist:Collection"
 domain_tags: 
   - "SBRM"

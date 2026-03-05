@@ -1,7 +1,7 @@
 ---
 "@context": "ipfs://bafkreifcontext...[Base_Context]"
 "@id": "urn:uuid:journal-phase5-l402-commerce"
-ontological_class: "SystemJournal"
+ontological_class: "Documentation"
 gist_equivalent: "gist:HistoricalEvent"
 domain_tags: 
   - "L402-Protocol"

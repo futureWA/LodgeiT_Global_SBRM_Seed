@@ -1,7 +1,7 @@
 ---
 "@context": "ipfs://bafkreifcontext...[Base_Context]"
 "@id": "urn:uuid:arch-cryptographic-sovereignty-protocol"
-ontological_class: "TechnicalStandard"
+ontological_class: "Documentation"
 gist_equivalent: "gist:Requirement"
 domain_tags:
   - "Cryptography"

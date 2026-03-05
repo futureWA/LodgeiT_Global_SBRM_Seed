@@ -1,5 +1,3 @@
----
-
 ## 🏗️ System Architecture
 
 The architecture consists of three primary layers:
