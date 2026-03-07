@@ -91,6 +91,12 @@ validate_revenue_breakdown(Entity, Period) :-
     sbrm_fact(Entity, Period, 'urn:uuid:def-sbr-revenue', TotalRevenue, _, 'RollUp'),
     TotalRevenue =:= RevBlue + RevGreen + RevRed + RevYellow.
 
+% 5. Equity Roll-Forward
+    (   validate_equity_rollforward('urn:uuid:def-sbrm-reporting-entity', 'urn:uuid:def-sbrm-reporting-period')
+    ->  writeln('[PASS] Equity Roll-forward (Open + P&L - Div = Close)')
+    ;   writeln('[FAIL] Equity Roll-Forward Broken')
+    ),
+
 % --- 4. ONTOLOGICAL BRANCH STRUCTURE (TAXONOMY) ---
 sbrm_parent('urn:uuid:def-sbr-current-assets', 'urn:uuid:def-sbr-total-assets').
 sbrm_parent('urn:uuid:def-sbr-non-current-assets', 'urn:uuid:def-sbr-total-assets').
