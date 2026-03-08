@@ -380,6 +380,9 @@
   },
   "active": "834c4ed14af881d9",
   "lastOpenFiles": [
+    "00_Architecture/Architecture_Rules_and_Execution.md",
+    "03_Registry/registry-sbrm-master-ruleset.md",
+    "01_Ontology/fact-accumulated-depreciation-2026.md",
     "00_Architecture/L402-gateway.md",
     "00_Architecture/JSON-LD_Frame.md",
     "00_Architecture/journal-phase-5.md",
@@ -394,7 +397,6 @@
     "00_Architecture/Architecture_Cryptographic_Sovereignty.md",
     "00_Architecture/New Text Document.txt",
     "Developer Onboarding.md",
-    "00_Architecture/Architecture_Rules_and_Execution.md",
     "Legacy Scripts/Moved.png",
     "Legacy Scripts/sync_signatures.py",
     "Legacy Scripts/prolog_bridge.py",
@@ -414,8 +416,6 @@
     "01_Ontology/fact-profit-loss-2026.md",
     "01_Ontology/fact-plant-at-cost-2026.md",
     "01_Ontology/fact-other-expenses-2026.md",
-    "01_Ontology/fact-other-current-liabilities-2026.md",
-    "01_Ontology/fact-opening-equity-2025.md",
-    "01_Ontology/fact-non-current-liabilities-2026.md"
+    "01_Ontology/fact-other-current-liabilities-2026.md"
   ]
 }
